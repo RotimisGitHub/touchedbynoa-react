@@ -1,0 +1,50 @@
+.scroll-container {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+}
+
+.horizontal-scroller {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  // Will use Js to use the scroll buttons to interact
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 600px;
+  width: 100%;
+}
+
+.horizontal-scroller::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+}
+
+.direction-buttons {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: inherit;
+
+}
+
+.scroll-direction-button {
+  background-color: rgba(255, 255, 255, 0.25);
+  padding: 20px;
+  border: none;
+  font-size: 3rem;
+}
+.scroll-direction-button:hover {
+  cursor: pointer;
+}
+
+.scroll-prop-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
