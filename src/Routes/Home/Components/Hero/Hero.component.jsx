@@ -35,7 +35,8 @@ const Hero = ({images}) => {
                 </div>
 
                 <div className={'hero-cta'}>
-                    <Button link={'/book'}>
+                    <Button link={'/book'}
+                    type={'button'}>
                         BOOK NOW
                     </Button>
                 </div>

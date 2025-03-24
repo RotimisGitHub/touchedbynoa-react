@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 body {
   margin: 0;
+  height: 100%;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -26,4 +27,9 @@ a {
 button:disabled:hover {
   cursor: not-allowed;
   color: #656262;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
 }

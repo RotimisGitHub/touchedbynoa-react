@@ -1,0 +1,26 @@
+.auth-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+
+  .partitioned-container {
+    padding: 20px;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .active-form {
+    background-color: #ff006c;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+}
+
