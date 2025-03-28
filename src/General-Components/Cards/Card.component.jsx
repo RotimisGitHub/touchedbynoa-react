@@ -1,4 +1,4 @@
-import Button from "../Button/Button.component";
+import Button from "../Buttons/CTA-Button.component";
 import './Card.styles.scss'
 
 const Card = ({hairstyle}) => {
@@ -11,7 +11,7 @@ const Card = ({hairstyle}) => {
                 <h2>{hairstyleTitle}</h2>
                 <p>{description}</p>
                 {/* to be changed to book/hairstyle_link */}
-                <Button link={'/book'}>
+                <Button link={`/services/${id}`} key={id} size={'small'}>
                     LEARN MORE
                 </Button>
 

@@ -1,5 +1,5 @@
 import './Form-Blurb.styles.scss'
-import Button from "../../../../General-Components/Button/Button.component";
+import Button from "../../../../General-Components/Buttons/CTA-Button.component";
 
 
 const FormBlurb = ({formType, setActiveForm}) => {

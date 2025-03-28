@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faApple, faGoogle} from "@fortawesome/free-brands-svg-icons";
 import CustomInput from "../Inputs/Custom-Input.component";
-import Button from "../../../../General-Components/Button/Button.component";
+import Button from "../../../../General-Components/Buttons/CTA-Button.component";
 import {useRef} from "react";
 
 import './Custom-Form.styles.scss'

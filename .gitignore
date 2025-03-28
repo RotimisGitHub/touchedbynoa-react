@@ -18,6 +18,9 @@
 .env.test.local
 .env.production.local
 
+#My Files
+src/utils/firebase/firebase-basics.utils.js
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

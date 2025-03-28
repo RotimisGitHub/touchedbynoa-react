@@ -1,0 +1,48 @@
+.product-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100vw;
+  padding: 100px;
+}
+
+.products-visuals-container, .products-booking-container {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.product-image {
+  border-radius: 8px 8px 8px 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+.products-booking-container {
+  overflow-y: scroll;
+  flex-wrap: wrap;
+}
+.product-size-selection {
+
+  .custom-radio-divs{
+    display: flex;
+    flex-direction: row;
+
+  }
+
+}
+
+.product-cta-section {
+  display: flex;
+  justify-content: center;
+  margin: 0 25%;
+  width: 50%;
+
+}
+
+.select-style-option-cta {
+  font-weight: bold;
+}
+
+
+

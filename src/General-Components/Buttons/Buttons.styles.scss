@@ -6,8 +6,16 @@
   font-size: 1.5rem;
   color: white;
 }
+.button-cta-small{
+  padding: 10px;
+  background-color: #322c2c;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 1.5rem;
+  color: white;
+}
 
-.button-cta:hover{
+.button-cta:hover, .button-cta-small:hover{
   background-color: #ff006c;
   cursor: pointer;
 }

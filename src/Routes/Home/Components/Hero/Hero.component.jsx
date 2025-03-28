@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import Button from "../../../../General-Components/Button/Button.component";
+import Button from "../../../../General-Components/Buttons/CTA-Button.component";
 import './Hero.styles.scss'
 
 const Hero = ({images}) => {

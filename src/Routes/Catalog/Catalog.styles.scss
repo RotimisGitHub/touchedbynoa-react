@@ -1,0 +1,22 @@
+.catalog-container {
+  padding-top: 120px;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+
+  .products-container {
+    margin-right: 40px;
+    display: grid;
+    gap: 20px;
+    width: 75%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .products-filter-container {
+    margin-left: 20px;
+    width: 25%;
+    overflow-y: scroll;
+  }
+}
+
+
