@@ -1,5 +1,5 @@
 import './Form-Blurb.styles.scss'
-import Button from "../../../../General-Components/Buttons/CTA-Button.component";
+import ProgressiveButton from "../../../../General-Components/Buttons/ProgressiveButton.component";
 
 
 const FormBlurb = ({formType, setActiveForm}) => {
@@ -11,8 +11,8 @@ const FormBlurb = ({formType, setActiveForm}) => {
             <p>Don't have an account with up? Please Sign Up Now!</p>}
 
             {formType === "sign-in" ?
-                <Button type={'submit'} onClickHandler={() => setActiveForm('sign-in')}>SIGN IN</Button> :
-                <Button type={'submit'} onClickHandler={() => setActiveForm('sign-up')}>SIGN UP</Button>}
+                <ProgressiveButton type={'submit'} onClickHandler={() => setActiveForm('sign-in')}>SIGN IN</ProgressiveButton> :
+                <ProgressiveButton type={'submit'} onClickHandler={() => setActiveForm('sign-up')}>SIGN UP</ProgressiveButton>}
 
         </div>
 
