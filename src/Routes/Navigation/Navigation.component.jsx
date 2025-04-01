@@ -1,10 +1,15 @@
-import { Fragment } from "react";
-import { Outlet, Link } from "react-router-dom";
+import {Fragment, useContext} from "react";
+import {Outlet, Link} from "react-router-dom";
 import "./navigation.styles.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faScissors, faCalendarAlt, faUser, faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import {AuthContext} from "../../Context/UserProvider.component";
+import {signOutUser} from "../../utils/firebase/firebase-users.utils";
 
 const Navigation = () => {
+
+    const {authData} = useContext(AuthContext)
+
     return (
         <Fragment>
             <nav className="navigation">
@@ -22,43 +27,51 @@ const Navigation = () => {
 
                 <div>
                     <div className="navigation-links-container">
-                        
+
                         <Link className="navigation-links" to="/book">
-                            <FontAwesomeIcon icon={faCalendarAlt} />
+                            <FontAwesomeIcon icon={faCalendarAlt}/>
                             BOOK NOW
                         </Link>
                     </div>
 
                     <div className="navigation-links-container">
-                            <Link className="navigation-links" to="/services">
-                                <FontAwesomeIcon icon={faScissors} />
-                                SERVICES
-                            </Link>
-                    </div>
-
-                    <div className="navigation-links-container">
-                        <Link className="navigation-links" to="/profile">
-                            <FontAwesomeIcon icon={faUser} />
-                            PROFILE
+                        <Link className="navigation-links" to="/services">
+                            <FontAwesomeIcon icon={faScissors}/>
+                            SERVICES
                         </Link>
                     </div>
 
-                    {/*<div className="navigation-links-container">*/}
-                    {/*    <Link className="navigation-links" to="/contact">*/}
-                    {/*        CONTACT US*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
+                    {
+                        authData ?
+                            <>
+                            <div className="navigation-links-container">
+                                <Link className="navigation-links" to="/profile">
+                                    <FontAwesomeIcon icon={faUser}/>
+                                    PROFILE
+                                </Link>
+                            </div>
+                            <div className="navigation-links-container">
+                                <span className="navigation-links"
+                                onClick={signOutUser}>
+                                    <FontAwesomeIcon icon={faCircleUser}/>
+                                    SIGN OUT
+                                </span>
+                            </div>
+                        </>:
+                            <div className="navigation-links-container">
+                                <Link className="navigation-links" to="/auth">
+                                    <FontAwesomeIcon icon={faCircleUser}/>
+                                    SIGN IN
+                                </Link>
+                            </div>
 
-                    <div className="navigation-links-container">
-                        <Link className="navigation-links" to="/auth">
-                            <FontAwesomeIcon icon={faCircleUser} />
-                            SIGN IN / SIGN OUT
-                        </Link>
-                    </div>
+                    }
+
+
                 </div>
             </nav>
 
-            <Outlet />
+            <Outlet/>
         </Fragment>
     );
 };

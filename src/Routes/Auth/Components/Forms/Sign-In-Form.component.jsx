@@ -5,12 +5,15 @@ import {useRef, useState} from "react";
 import AuthButtons from "../Auth-Buttons/AuthButtons.component";
 import {logInWithEnP} from "../../../../utils/firebase/firebase-users.utils";
 import './Auth-Form.styles.scss'
+import {useNavigate} from "react-router-dom";
 
 const SignInForm = ({logGoogle}) => {
     const loginData = {
         email: '',
         password: ''
     }
+    const navigate = useNavigate();
+
     // States
     const [userInputData, setInputData] = useState(loginData)
     const {email, password} = userInputData
@@ -38,11 +41,13 @@ const SignInForm = ({logGoogle}) => {
         event.preventDefault()
 
         try {
-            const response = await logInWithEnP(email, password)
+            const response = await logInWithEnP(email, password);
             if (response) {
                 formRef.current.submit()
                 // Clear FORM FIELDS
-                setInputData(loginData)
+                setInputData(loginData);
+                navigate('/');
+
 
                 console.log('complete')
             }
@@ -89,15 +94,14 @@ const SignInForm = ({logGoogle}) => {
         <form ref={formRef}
               className={'auth-form'}
               onSubmit={handleSubmit}>
-                <h1>SIGN IN</h1>
+            <h1>SIGN IN</h1>
 
             <div className={'firebase-app-buttons'}>
                 <FontAwesomeIcon icon={faGoogle} onClick={logGoogle}/>
                 <FontAwesomeIcon icon={faApple}/>
             </div>
 
-                <p>or use your account</p>
-
+            <p>or use your account</p>
 
 
             <CustomInput
@@ -117,11 +121,11 @@ const SignInForm = ({logGoogle}) => {
                 ref={passwordRef}
                 placeholder={'Password'}
             />
-                <p>Forgot Your Password?</p>
+            <p>Forgot Your Password?</p>
 
 
-                <AuthButtons validForm={() => emailRef.current.checkValidity() && passwordRef.current.checkValidity()}>SIGN
-                    IN</AuthButtons>
+            <AuthButtons validForm={() => emailRef.current.checkValidity() && passwordRef.current.checkValidity()}>SIGN
+                IN</AuthButtons>
 
         </form>
     )
