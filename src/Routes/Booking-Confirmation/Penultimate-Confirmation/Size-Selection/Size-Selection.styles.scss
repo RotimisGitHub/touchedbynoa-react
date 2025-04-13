@@ -1,0 +1,16 @@
+.pc-page-size-selection{
+  margin: 20px 0;
+}
+
+.product-size-selection {
+  display: flex;
+  flex-direction: row;
+
+  .size_selection-header{
+    display: flex;
+    width: 250px;
+    font-weight: bold;
+    margin-left: 10px;
+    align-items: center;
+  }
+}

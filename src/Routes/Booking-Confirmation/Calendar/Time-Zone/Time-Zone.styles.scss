@@ -1,0 +1,15 @@
+.time-zone-container {
+  background-color: #ff006c;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-weight: bold;
+  justify-content: center;
+
+  .time-zone{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}

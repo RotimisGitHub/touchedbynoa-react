@@ -11,12 +11,9 @@ const Navigation = () => {
     const {authData} = useContext(AuthContext)
 
     return (
-        <Fragment>
+        <>
             <nav className="navigation">
-                {/*
-                    2 DIVs IN BETWEEN ENABLE FLEXBOX TO SEPARATE THEM WITHIN THE NAVIGATION BAR.
-                    USING JUSTIFY-CONTENT: SPACE-BETWEEN
-                */}
+
                 <div>
                     <div className="navigation-links-container">
                         <Link className="navigation-links" to="/">
@@ -26,13 +23,6 @@ const Navigation = () => {
                 </div>
 
                 <div>
-                    <div className="navigation-links-container">
-
-                        <Link className="navigation-links" to="/book">
-                            <FontAwesomeIcon icon={faCalendarAlt}/>
-                            BOOK NOW
-                        </Link>
-                    </div>
 
                     <div className="navigation-links-container">
                         <Link className="navigation-links" to="/services">
@@ -44,20 +34,20 @@ const Navigation = () => {
                     {
                         authData ?
                             <>
-                            <div className="navigation-links-container">
-                                <Link className="navigation-links" to="/profile">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                    PROFILE
-                                </Link>
-                            </div>
-                            <div className="navigation-links-container">
+                                <div className="navigation-links-container">
+                                    <Link className="navigation-links" to="/profile">
+                                        <FontAwesomeIcon icon={faUser}/>
+                                        PROFILE
+                                    </Link>
+                                </div>
+                                <div className="navigation-links-container">
                                 <span className="navigation-links"
-                                onClick={signOutUser}>
+                                      onClick={signOutUser}>
                                     <FontAwesomeIcon icon={faCircleUser}/>
                                     SIGN OUT
                                 </span>
-                            </div>
-                        </>:
+                                </div>
+                            </> :
                             <div className="navigation-links-container">
                                 <Link className="navigation-links" to="/auth">
                                     <FontAwesomeIcon icon={faCircleUser}/>
@@ -70,9 +60,13 @@ const Navigation = () => {
 
                 </div>
             </nav>
+            <div style={{
+                paddingTop: '10vh'
+            }}>
+                <Outlet/>
+            </div>
 
-            <Outlet/>
-        </Fragment>
+        </>
     );
 };
 

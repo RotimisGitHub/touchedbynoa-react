@@ -1,22 +1,51 @@
 import './Product.styles.scss'
 import {useParams} from "react-router-dom";
 import ProgressiveButton from "../../General-Components/Buttons/ProgressiveButton.component";
-import {useContext} from "react";
-import CalenderComponent from "./Calender/Calender.component";
+import {useContext, useEffect, useState} from "react";
 import {CatalogContext} from "../../Context/CatalogProvider.component";
+import BookingPage from "../Booking-Confirmation/Booking-Page.components";
+import Modal from "../../General-Components/Modal/Modal.component";
+import {CalendarContext} from "../../Context/CalendarProvider.component";
 
 
 const Product = () => {
 
     const {hairstyles} = useContext(CatalogContext)
-    console.log(hairstyles)
+    const {fullDateVariable, setFullDateVariable} = useContext(CalendarContext)
+    const [activeModal, setModalState] = useState(false)
+
+    const handleModalState = (action) => {
+        switch (action) {
+            case 'open':
+                setModalState(true)
+                setFullDateVariable({
+                    ...fullDateVariable,
+                    hairstyleTitle: product.hairstyleTitle,
+                    hairstyleImage: product.imageFile
+                });
+                break;
+            case 'close':
+
+                setFullDateVariable({
+                    ...fullDateVariable,
+                    hairstyleTitle: null,
+                    hairstyleImage: null,
+                    pageState: 0
+                });
+                setModalState(false);
+                break;
+            default:
+                throw Error('Unknown action: ' + action);
+
+        }
+    }
+
 
 
     const {productId} = useParams();
     const allHairstyles = Object.values(hairstyles).flatMap(category => category);
     const product = allHairstyles
         .find(style => style.id === Number(productId));
-
 
 
     if (!product) return <h2>Product Not Found</h2>;
@@ -40,25 +69,25 @@ const Product = () => {
 
                     <div className={'product-cta-section'}>
 
-                        <ProgressiveButton type={'submit'}>
-                            Add To Favourites
+                        <ProgressiveButton type={'submit'} onClickHandler={() => handleModalState('open')}>
+                            Book Appointment
                         </ProgressiveButton>
                     </div>
                 </div>
 
 
                 <div className={'product-booking-section'}>
-                    <form className={'product-form'}>
-
-                        <div className={'availability-section'}>
 
 
-                            <CalenderComponent productName={product.hairstyleTitle}/>
+                    <div className={'availability-section'}>
+
+                        <Modal onClose={() => handleModalState('close')} show={activeModal}>
+                            <BookingPage handleModal={handleModalState}/>
+                        </Modal>
 
 
-                        </div>
+                    </div>
 
-                    </form>
 
                     {/*<div className={'production-reviews-section'}>*/}
                     {/*    <p>*/}

@@ -6,11 +6,13 @@ import {useState} from "react";
 import SignInForm from "./Components/Forms/Sign-In-Form.component";
 import SignUpForm from "./Components/Forms/Sign-Up-Form.component";
 import {createUserDocument, signInWithGooglePopup} from "../../utils/firebase/firebase-users.utils";
+import {useNavigate} from "react-router-dom";
 
 
 
 const AuthComponent = () => {
     const [activeForm, setActiveForm] = useState('sign-in')
+    const navigate = useNavigate()
 
     const activeFormClassName = `partitioned-container active-form`
     const inactiveFormClassName = `partitioned-container`
@@ -18,7 +20,7 @@ const AuthComponent = () => {
     const logGoogleUser = async () => {
         const {user} = await signInWithGooglePopup()
         const userDocument = await createUserDocument(user)
-        console.log(userDocument)
+        if (userDocument) navigate('/')
     }
 
     return (

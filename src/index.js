@@ -5,6 +5,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import UserProvider from "./Context/UserProvider.component";
 import CatalogProvider from "./Context/CatalogProvider.component";
+import CalendarProvider from "./Context/CalendarProvider.component";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,7 +15,10 @@ root.render(
             <UserProvider>
 
                 <CatalogProvider>
-                    <App/>
+                    <CalendarProvider>
+                        <App/>
+                    </CalendarProvider>
+
                 </CatalogProvider>
 
 

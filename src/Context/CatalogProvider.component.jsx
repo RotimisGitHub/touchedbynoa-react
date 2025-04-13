@@ -12,7 +12,7 @@ const CatalogProvider = ({children}) => {
 
     useEffect(() => {
         const getCategories = async () => {
-            const categories = await getCollectionAndDocuments();
+            const categories = await getCollectionAndDocuments('Hairstyles');
             setHairstyles(categories)
         }
 

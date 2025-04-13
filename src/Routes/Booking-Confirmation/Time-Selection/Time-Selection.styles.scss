@@ -1,0 +1,50 @@
+.time-selection-container {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  border: 5px solid #ff006c;
+  height: 70vh;
+  background-color: white;
+}
+.time-selection-header{
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+
+  .pc-selected-date {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+}
+
+.time-selection-button {
+  width: 80%;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ff006c;
+  color: #ff006c;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.time-selection-button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #ff006c;
+}
+
+
+
+.time-selection-body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 20px 0;
+  overflow-y: scroll;
+
+
+}

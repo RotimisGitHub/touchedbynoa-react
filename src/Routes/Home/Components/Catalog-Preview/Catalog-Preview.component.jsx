@@ -8,7 +8,6 @@ import {CatalogContext} from "../../../../Context/CatalogProvider.component";
 
 const CatalogPreview = () => {
     const {hairstyles} = useContext(CatalogContext)
-    console.log(hairstyles)
     return (
         <div className={'catalog-preview-container'}>
             <div className={'catalog-preview-text'}>

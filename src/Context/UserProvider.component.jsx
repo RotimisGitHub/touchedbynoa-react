@@ -1,34 +1,44 @@
-import {createContext, useEffect, useState} from "react";
-import {onAuthStateChangedListener, createUserDocument } from '../utils/firebase/firebase-users.utils'
+import {createContext, useContext, useEffect, useState} from "react";
+import {onAuthStateChangedListener, createUserDocument} from '../utils/firebase/firebase-users.utils'
+import {getBookingsForUserProfile} from '../utils/firebase/firebase-collections.utils'
+import {CalendarContext} from "./CalendarProvider.component";
 
 export const AuthContext = createContext(null)
 
 const UserProvider = ({children}) => {
+    const {setFullDateVariable} = useContext(CalendarContext)
 
 
     const [authData, setAuthData] = useState(null)
 
     // This Event Handler Retrieves User Data from Firebase and sets it into the Context that is now available
+
     // Across the Application
 
     const handleAuthData = (displayName, email) => {
-        setAuthData({displayName, email});
+        setAuthData({
+            ...authData,
+            displayName,
+            email
+        });
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChangedListener((user) => {
+        const unsubscribe = onAuthStateChangedListener(async (user) => {
+            if (user) {
 
-            // Utility Function already checks to see if user exists in database. Will always return a User Doc.
-            if (user){
-                createUserDocument(user
-                )
+                await createUserDocument(user);
+
+                setAuthData(user);
+            } else {
+                // Reset context if user logs out
+                setAuthData(null);
             }
-            setAuthData(user)
-            // console.log(user)
-
         });
+
         return unsubscribe;
     }, []);
+
 
 
 

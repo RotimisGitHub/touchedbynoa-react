@@ -8,6 +8,7 @@ const CustomInput = ({identifier, onChange, value, ...remainingFields}) => {
             <input
 
                 name={identifier}
+                id={identifier}
                 value={value}
                 onChange={onChange}
                 className='formField'
