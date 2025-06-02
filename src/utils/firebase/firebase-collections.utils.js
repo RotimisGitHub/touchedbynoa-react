@@ -1,4 +1,4 @@
-import {doc, collection, getDocs, writeBatch, query, getDoc, setDoc, updateDoc, arrayUnion} from 'firebase/firestore';
+import {doc, collection, getDocs, writeBatch, query, getDoc, setDoc, updateDoc, arrayUnion, where} from 'firebase/firestore';
 
 import {firebaseApp, db} from "./firebase-basics.utils";
 
@@ -14,10 +14,47 @@ export const addCollectionToDocuments = async (collectionKey, objectsToAdd) => {
     await batch.commit()
 }
 
+export const gatherAvailableTimes = async (bookingDate) => {
+    const addedDay = bookingDate.setDate(bookingDate.getDate() + 1);
+    const collectionRef = collection(db, 'bookings')
+    const q = query(collectionRef, where('date', '>=', bookingDate),
+        where('date', '<=', addedDay))
+    const querySnapshot = await getDocs(q)
+
+    if (querySnapshot.empty){
+        return null
+    } else {
+        return querySnapshot.docs.map(doc => doc.data());
+
+    }
+
+}
+
+
 export const addToBookingsCollection = async (booking) => {
 
 
-    const {hairstyleTitle, hairstyleImage, userId, name, userEmail, month, year, ...details} = booking;
+    const {hairstyleTitle, hairstyleImage, start, end, userId, name, userEmail, month, year, ...details} = booking;
+    const appendedBooking = {
+        invitee: {
+            id: userId,
+            name: name,
+            email: userEmail
+        },
+        hairstyle:
+            {
+                title: hairstyleTitle,
+                image: hairstyleImage
+            },
+        timeFrame: {
+            year: year,
+            month: month,
+            start: start,
+            end: end
+        },
+        details: details,
+
+    }
     const bookingCollectionRef = doc(db, 'bookings', String(year));
 
     try {
@@ -26,36 +63,12 @@ export const addToBookingsCollection = async (booking) => {
         if (bookingSnapshot.exists()) {
 
             await updateDoc(bookingCollectionRef, {
-                [month]: arrayUnion({
-                    invitee: {
-                        id: userId,
-                        name: name,
-                    },
-                    details: details,
-                    hairstyle:
-                        {
-                            title: hairstyleTitle,
-                            image: hairstyleImage
-                        }
-
-                })
+                [month]: arrayUnion(appendedBooking)
             });
         } else {
 
             await setDoc(bookingCollectionRef, {
-                [month]: arrayUnion({
-                    invitee: {
-                        id: userId,
-                        name: name,
-                    },
-                    details: details,
-                    hairstyle:
-                        {
-                            title: hairstyleTitle,
-                            image: hairstyleImage
-                        }
-
-                })
+                [month]: arrayUnion(appendedBooking)
             });
         }
     } catch (error) {
@@ -68,35 +81,11 @@ export const addToBookingsCollection = async (booking) => {
 
 export const getBookingsForUserProfile = async (authId) => {
     const collectionRef = collection(db, 'bookings');
-    const q = query(collectionRef)
+    const q = query(collectionRef, where('invitee.id', '==', authId))
     const querySnapshot = await getDocs(q)
 
-    let userBookings = [];
+    return querySnapshot.docs.map(doc => doc.data());
 
-    querySnapshot.forEach(docSnapshot => {
-        const data = docSnapshot.data();
-        const months = Object.keys(data)
-
-        let eachMonth = []
-        months.forEach(month => {
-            eachMonth = [...eachMonth, data[month]]
-            return (
-                eachMonth
-            )
-
-        })
-
-        eachMonth = eachMonth.flatMap(entry => entry)
-
-
-        const userSpecificBookings = eachMonth.filter(
-            booking => booking.invitee.id === authId
-        );
-
-        userBookings = [...userBookings, ...userSpecificBookings];
-    });
-
-    return userBookings;
 }
 
 

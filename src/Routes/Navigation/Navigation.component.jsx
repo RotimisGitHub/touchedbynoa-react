@@ -1,14 +1,18 @@
-import {Fragment, useContext} from "react";
+import {Fragment} from "react";
 import {Outlet, Link} from "react-router-dom";
 import "./navigation.styles.scss";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faScissors, faCalendarAlt, faUser, faCircleUser} from "@fortawesome/free-solid-svg-icons";
-import {AuthContext} from "../../Context/UserProvider.component";
+import {faScissors, faUser, faCircleUser, faUserTie} from "@fortawesome/free-solid-svg-icons";
 import {signOutUser} from "../../utils/firebase/firebase-users.utils";
+import {useSelector} from "react-redux";
 
 const Navigation = () => {
 
-    const {authData} = useContext(AuthContext)
+    const { currentUser, role } = useSelector((state) => state.user);
+
+    if (!currentUser || role === null) {
+        return <h2>Loading user role...</h2>
+    }
 
     return (
         <>
@@ -32,7 +36,7 @@ const Navigation = () => {
                     </div>
 
                     {
-                        authData ?
+                        currentUser ?
                             <>
                                 <div className="navigation-links-container">
                                     <Link className="navigation-links" to="/profile">
@@ -40,6 +44,17 @@ const Navigation = () => {
                                         PROFILE
                                     </Link>
                                 </div>
+                                { role === 'admin' && (
+                                    <div className="navigation-links-container">
+                                        <Link className="navigation-links" to="/admin">
+                                            <FontAwesomeIcon icon={faUserTie}/>
+                                            ADMIN
+                                        </Link>
+                                    </div>
+                                )
+
+                                }
+
                                 <div className="navigation-links-container">
                                 <span className="navigation-links"
                                       onClick={signOutUser}>
@@ -61,7 +76,8 @@ const Navigation = () => {
                 </div>
             </nav>
             <div style={{
-                paddingTop: '10vh'
+                paddingTop: '10vh',
+                height: 'fit-content'
             }}>
                 <Outlet/>
             </div>

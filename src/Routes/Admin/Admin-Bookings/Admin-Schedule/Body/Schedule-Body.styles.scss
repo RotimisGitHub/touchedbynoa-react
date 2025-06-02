@@ -1,0 +1,11 @@
+.schedule-booking{
+  border: 1px solid black;
+
+  .schedule-booking-cell {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    font-size: 0.8rem;
+
+  }
+}

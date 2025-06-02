@@ -5,16 +5,40 @@ const CustomInput = ({identifier, onChange, value, ...remainingFields}) => {
 
     return (
         <div className={'inputDivider'}>
-            <input
+            {
+                remainingFields.title &&
+                <label htmlFor={identifier} className={'input-label'}>{remainingFields.title}</label>
+            }
 
-                name={identifier}
-                id={identifier}
-                value={value}
-                onChange={onChange}
-                className='formField'
-                required
+            {
+                remainingFields.inputType === 'textarea' ? (
+                        <textarea
 
-                {...remainingFields}/>
+                            name={identifier}
+                            id={identifier}
+                            value={value}
+                            onChange={onChange}
+                            className='formField'
+                            rows={5}
+                            required
+
+                            {...remainingFields}/>
+                    ) :
+                    (
+                        <input
+
+                            name={identifier}
+                            id={identifier}
+                            value={value}
+                            onChange={onChange}
+                            className='formField'
+                            required
+
+                            {...remainingFields}/>
+                    )
+
+            }
+
         </div>
     )
 }

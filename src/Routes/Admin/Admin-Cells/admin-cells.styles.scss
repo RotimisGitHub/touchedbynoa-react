@@ -1,0 +1,18 @@
+.admin-cell-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #313348;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  background-color: #313348;
+  color: #e8e0e0;
+  font-weight: bold;
+
+}
+
+.cell-icon {
+  font-size: 2rem;
+  margin-right: 20px;
+}

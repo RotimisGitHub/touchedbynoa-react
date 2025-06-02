@@ -2,8 +2,15 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Button from "../../../../General-Components/Buttons/CTA-Button.component";
 import './Hero.styles.scss'
+import braids1 from '../../../../assets/home-hero/braids-2.png';
+import braids2 from '../../../../assets/home-hero/braids-4.png';
 
-const Hero = ({images}) => {
+const Hero = () => {
+
+    const images = [
+        braids1, braids2
+    ]
+
     const [imageIteration, setImageIteration] = useState(0)
 
     useEffect(() => {
@@ -18,6 +25,7 @@ const Hero = ({images}) => {
 
         return () => clearInterval(timer);
     }, [imageIteration]);
+
     return (
         <div className={'hero-container'}>
 

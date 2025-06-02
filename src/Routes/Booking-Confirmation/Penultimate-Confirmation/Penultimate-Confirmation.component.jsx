@@ -1,33 +1,57 @@
 import './Penultimate-Confirmation.styles.scss'
-import TimeZone from "../Calendar/Time-Zone/Time-Zone.component";
-import {useContext, useState} from "react";
-import {CalendarContext} from "../../../Context/CalendarProvider.component";
+import TimeZone from "../../../General-Components/Calendar/Time-Zone/Time-Zone.component";
 import ProgressiveButton from "../../../General-Components/Buttons/ProgressiveButton.component";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarWeek, faLocation, faStopwatch, faUserClock} from "@fortawesome/free-solid-svg-icons";
 import SizeSelection from "./Size-Selection/Size-Selection.component";
 import {addToBookingsCollection} from '../../../utils/firebase/firebase-collections.utils'
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectCalendarReducer} from "../../../store/calendar/calendar.selector";
+import {CardElement} from "@stripe/react-stripe-js";
+
+import { PaymentRequestButtonElement, useStripe } from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
+
+
 
 const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBookingData, setActiveModal}) => {
-    const {fullDateVariable} = useContext(CalendarContext)
+    const {date, time, hairstyleDuration, hairstylePrice} = useSelector(selectCalendarReducer)
+    const navigate = useNavigate()
+    const stripe = useStripe();
+    const [paymentRequest, setPaymentRequest] = useState(null);
 
-    const [completeScheduling, setCompleteScheduling] = useState(false)
+    useEffect(() => {
+        if (stripe) {
+            console.log('stripe', stripe)
+            const pr = stripe.paymentRequest({
+                country: 'GB',
+                currency: 'gbp',
+                total: {
+                    label: 'Booking Total',
+                    amount: hairstylePrice * 100,
+                },
+                requestPayerName: true,
+                requestPayerEmail: true,
+            });
+
+            // Check if user can actually use Apple Pay / Google Pay
+            pr.canMakePayment().then(result => {
+                if (result) {
+                    setPaymentRequest(pr); // render the button
+                }
+            });
+        }
+    }, [stripe, hairstylePrice]);
 
     const handleCompleteScheduling = async () => {
 
         const completeBooking = await addToBookingsCollection(completeBookingData)
         if (completeBooking) {
-            setCompleteScheduling(true)
             setActiveModal('close')
+            navigate('/profile/bookings')
         }
     }
-
-    const hairstyleMockDuration = {
-        duration: 4,
-        bufferTime: 45
-    }
-
-
     return (
         <div className={'pc-container'}>
             <div className={'pc-header'}>
@@ -35,9 +59,9 @@ const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBo
                 <div className={'pc-selected-date'}>
 
                     <div className={'pc-selected-times'}>
-                        <span><FontAwesomeIcon icon={faCalendarWeek}/> {fullDateVariable.date?.toLocaleString()}</span>
-                        <span><FontAwesomeIcon icon={faUserClock}/> {fullDateVariable.time?.toLocaleString()}</span>
-                        <span><FontAwesomeIcon icon={faStopwatch}/> {hairstyleMockDuration.duration} Hours</span>
+                        <span><FontAwesomeIcon icon={faCalendarWeek}/> {date.toLocaleString()}</span>
+                        <span><FontAwesomeIcon icon={faUserClock}/> {time}</span>
+                        <span><FontAwesomeIcon icon={faStopwatch}/> {hairstyleDuration} Hours</span>
                         <span><FontAwesomeIcon icon={faLocation}/> Location Will Be Emailed When Booking Confirmed</span>
                     </div>
                 </div>
@@ -49,7 +73,11 @@ const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBo
                     By proceeding, you confirm that you have read and agree to
                     TouchByNoa's Terms of Use and Privacy Notice.
                 </span>
-                <ProgressiveButton type={'button'} disabled={!(selectedSizes.length && selectedSizes.thickness)}
+
+                {paymentRequest && (
+                    <PaymentRequestButtonElement options={{ paymentRequest }} />
+                )}
+                <ProgressiveButton type={'button'} disabled={!(selectedSizes?.length && selectedSizes?.thickness)}
                 onClickHandler={handleCompleteScheduling}>
                     Schedule Appointment
                 </ProgressiveButton>

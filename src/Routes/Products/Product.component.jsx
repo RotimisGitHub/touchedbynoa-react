@@ -1,51 +1,35 @@
 import './Product.styles.scss'
 import {useParams} from "react-router-dom";
 import ProgressiveButton from "../../General-Components/Buttons/ProgressiveButton.component";
-import {useContext, useEffect, useState} from "react";
-import {CatalogContext} from "../../Context/CatalogProvider.component";
+import {useState} from "react";
 import BookingPage from "../Booking-Confirmation/Booking-Page.components";
 import Modal from "../../General-Components/Modal/Modal.component";
-import {CalendarContext} from "../../Context/CalendarProvider.component";
+
+import {useDispatch, useSelector} from "react-redux";
+import {setHairstyle} from "../../store/calendar/calendar.reducer";
+import {selectHairstyleReducer} from "../../store/hairstyles/hairstyles.selector";
 
 
 const Product = () => {
 
-    const {hairstyles} = useContext(CatalogContext)
-    const {fullDateVariable, setFullDateVariable} = useContext(CalendarContext)
+    const {collection} = useSelector(selectHairstyleReducer)
+    const dispatch = useDispatch()
     const [activeModal, setModalState] = useState(false)
-
-    const handleModalState = (action) => {
-        switch (action) {
-            case 'open':
-                setModalState(true)
-                setFullDateVariable({
-                    ...fullDateVariable,
-                    hairstyleTitle: product.hairstyleTitle,
-                    hairstyleImage: product.imageFile
-                });
-                break;
-            case 'close':
-
-                setFullDateVariable({
-                    ...fullDateVariable,
-                    hairstyleTitle: null,
-                    hairstyleImage: null,
-                    pageState: 0
-                });
-                setModalState(false);
-                break;
-            default:
-                throw Error('Unknown action: ' + action);
-
-        }
-    }
 
 
 
     const {productId} = useParams();
-    const allHairstyles = Object.values(hairstyles).flatMap(category => category);
+    if (!collection) return <h2>Loading product data...</h2>;
+    const allHairstyles = Object.values(collection).flatMap(category => category);
     const product = allHairstyles
         .find(style => style.id === Number(productId));
+
+    const handleModalState = (modalAction) => {
+        setModalState(modalAction === 'open')
+        dispatch(setHairstyle({modalAction, product}))
+    }
+
+
 
 
     if (!product) return <h2>Product Not Found</h2>;

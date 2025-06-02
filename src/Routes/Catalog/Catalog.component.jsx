@@ -1,11 +1,13 @@
 import './Catalog.styles.scss'
 import Card from "../../General-Components/Cards/Card.component";
-import {useContext} from "react";
-import {CatalogContext} from "../../Context/CatalogProvider.component";
+
+import {useSelector} from "react-redux";
+import {selectHairstyleReducer} from "../../store/hairstyles/hairstyles.selector";
+
 
 
 const Catalog = () => {
-    const {hairstyles} = useContext(CatalogContext)
+    const {collection} = useSelector(selectHairstyleReducer)
     return (
         <div className={'catalog-container'}>
             <div className={'products-filter-container'}>
@@ -15,7 +17,7 @@ const Catalog = () => {
             <div className={'products-container'}>
 
                 {
-                    hairstyles['braids']?.map((hairstyle, index) => {
+                    collection['braids']?.map((hairstyle, index) => {
                         return (
                             <Card key={index} hairstyle={hairstyle}/>
                         )
@@ -23,7 +25,7 @@ const Catalog = () => {
                 }
 
                 {
-                    hairstyles['twists']?.map((hairstyle, index) => {
+                    collection['twists']?.map((hairstyle, index) => {
                         return (
                             <Card key={index} hairstyle={hairstyle}/>
                         )

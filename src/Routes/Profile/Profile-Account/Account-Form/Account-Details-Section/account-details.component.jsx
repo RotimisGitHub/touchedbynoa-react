@@ -1,7 +1,8 @@
 import './account-form.styles.scss'
-import {useContext, useRef, useState} from "react";
-import {AuthContext} from "../../../../../Context/UserProvider.component";
+import { useRef, useState} from "react";
 import ParameterForm from "../Parameter-Forms/parameter-form.component";
+import {useSelector} from "react-redux";
+import {selectUserSlice} from "../../../../../store/user/user.selector";
 
 
 const AccountForm = () => {
@@ -11,7 +12,7 @@ const AccountForm = () => {
         password: '',
         phoneNumber: ''
     }
-    const {authData} = useContext(AuthContext)
+    const currentUser = useSelector(selectUserSlice)
 
     const [userInputData, setInputData] = useState(accountData)
     const [changeParameter, setChangeParameter] = useState({
@@ -28,10 +29,10 @@ const AccountForm = () => {
         const getDisplayText = () => {
             if (parameter === "password") {
                 return "*".repeat(8);
-            } else if (authData[parameter] === null) {
+            } else if (currentUser[parameter] === null) {
                 return "Click Edit to Add";
             } else {
-                return authData[parameter];
+                return currentUser[parameter];
             }
         };
 
@@ -79,7 +80,7 @@ const AccountForm = () => {
                 <div className={'account-header-image'}>
 
 
-                    <img src={authData.photoURL} alt={authData.name}/>
+                    <img src={currentUser.photoURL} alt={currentUser.name}/>
                 </div>
                 <span className={'parameter-edit-button'}
                       onClick={() => handleParameterEdits('photoUrl')}>{!changeParameter.photoUrl ? 'Edit' : 'Cancel'}
@@ -95,7 +96,7 @@ const AccountForm = () => {
                                        inputRef={emailRef}
                                        formRef={emailFormRef}
                                        handleInputs={handleInputs}
-                                       authData={authData}
+                                       authData={currentUser}
                                        handleParameterEdits={handleParameterEdits}/>
                 }
                 <span className={'parameter-edit-button'}
@@ -111,7 +112,7 @@ const AccountForm = () => {
                                        inputRef={passwordRef}
                                        formRef={passwordFormRef}
                                        handleInputs={handleInputs}
-                                       authData={authData}
+                                       authData={currentUser}
                                        handleParameterEdits={handleParameterEdits}/>
 
                 }
@@ -128,7 +129,7 @@ const AccountForm = () => {
                                        inputRef={passwordRef}
                                        formRef={passwordFormRef}
                                        handleInputs={handleInputs}
-                                       authData={authData}
+                                       authData={currentUser}
                                        handleParameterEdits={handleParameterEdits}/>
 
                 }

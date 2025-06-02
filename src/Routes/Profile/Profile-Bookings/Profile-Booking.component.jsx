@@ -1,23 +1,23 @@
 import './Profile-Bookings.styles.scss'
-import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "../../../Context/UserProvider.component";
+import {useEffect, useState} from "react";
+
 import {getBookingsForUserProfile} from "../../../utils/firebase/firebase-collections.utils";
-import Button from "../../../General-Components/Buttons/CTA-Button.component";
 import '../../../General-Components/Cards/Card.styles.scss'
-import {CatalogContext} from "../../../Context/CatalogProvider.component";
+import {useSelector} from "react-redux";
+import {selectUserSlice} from "../../../store/user/user.selector";
 
 const ProfileBooking = () => {
-    const {authData} = useContext(AuthContext)
+    const currentUser = useSelector(selectUserSlice)
     const [userBookings, setUserBookings] = useState(null)
 
     useEffect(() => {
         const fetchBookings = async () => {
-            const bookings = await getBookingsForUserProfile(authData?.uid);
+            const bookings = await getBookingsForUserProfile(currentUser?.uid);
             setUserBookings(bookings);
         };
 
         fetchBookings();
-    }, []);
+    }, [currentUser]);
     console.log(userBookings)
 
 

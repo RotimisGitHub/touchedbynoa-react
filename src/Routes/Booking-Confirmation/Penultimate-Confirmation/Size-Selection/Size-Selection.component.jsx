@@ -1,9 +1,19 @@
 import './Size-Selection.styles.scss'
-import {hairstylesSizes} from "../../Booking-Confirmation.utils";
+import {hairstylesSizes} from "../../../../General-Components/Calendar/Booking-Confirmation.utils";
 import CustomRadio from "../../../../General-Components/Custom-Radios/Custom-Radio.component";
 
+import {useDispatch, useSelector} from "react-redux";
+import {setSelectedSizes} from "../../../../store/calendar/calendar.reducer";
+import {selectCalendarReducer} from "../../../../store/calendar/calendar.selector";
 
-const SizeSelection = ({selectedSizes, handleSelectedSizes}) => {
+
+const SizeSelection = () => {
+    const dispatch = useDispatch()
+    const {selectedSizes} = useSelector(selectCalendarReducer)
+
+    const handleSelectedSizes = (type, value) =>
+        dispatch(setSelectedSizes({type, value}))
+
     return (
         <div className={'pc-page-size-selection'}>
             <div className={'product-size-selection'}>

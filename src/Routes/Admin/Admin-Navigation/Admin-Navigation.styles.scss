@@ -1,0 +1,24 @@
+.admin-content-container {
+  background-color: #2a2b3d;
+  position: absolute;
+  display: flex;
+  height: fit-content;
+  width: 85%;
+  left: 15%;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+.admin-sidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #2a2b3d, #292b50, #2e2f47);
+  width: 15%;
+  height: 100vh;
+
+}
+

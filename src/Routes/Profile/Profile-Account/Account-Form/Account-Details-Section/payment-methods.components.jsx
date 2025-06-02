@@ -1,21 +1,22 @@
 import './account-form.styles.scss'
-import {useContext, useRef, useState} from "react";
-import {AuthContext} from "../../../../../Context/UserProvider.component";
+import {useState} from "react";
 import {faApplePay, faCcStripe, faGooglePay, faPaypal} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faWallet} from "@fortawesome/free-solid-svg-icons";
+import {useSelector} from "react-redux";
+import {selectUserSlice} from "../../../../../store/user/user.selector";
 
 
 const PaymentMethods = () => {
+    const currentUser = useSelector(selectUserSlice)
     const ParameterSpan = ({parameter}) => {
 
         const getDisplayText = () => {
             if (parameter === "password") {
                 return "*".repeat(8);
-            } else if (authData[parameter] === null) {
+            } else if (currentUser[parameter] === null) {
                 return "Click Edit to Add";
             } else {
-                return authData[parameter];
+                return currentUser[parameter];
             }
         };
 
@@ -38,7 +39,7 @@ const PaymentMethods = () => {
         applePay: '',
         googlePay: '',
     }
-    const {authData} = useContext(AuthContext)
+
 
     const [userInputData, setInputData] = useState(paymentData)
     const [changeParameter, setChangeParameter] = useState({

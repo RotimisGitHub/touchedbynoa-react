@@ -1,71 +1,72 @@
-import './profile-navigation.styles.scss'
+import '../../../General-Components/Dashboard-Styling/Dashboard.styles.scss'
 import {Link, Outlet} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faAddressCard, faCalendarAlt, faEnvelope, faHeart, faWallet
 } from "@fortawesome/free-solid-svg-icons";
-import {useContext} from "react";
-import {AuthContext} from "../../../Context/UserProvider.component";
+
+import {useSelector} from "react-redux";
+import {selectUserSlice} from "../../../store/user/user.selector";
 
 const ProfileNavigation = () => {
 
-    const {authData} = useContext(AuthContext)
-    const {displayName, email, photoURL} = authData
+    const currentUser = useSelector(selectUserSlice);
+    const {displayName, photoURL} = currentUser
 
     return (
-        <div className={'profile-container'}>
+        <div className={'dashboard-container'}>
 
-                <div className={'profile-sidebar'}>
-                    <nav className="profile-navigation">
-                        <div>
-                            <div className="profile-links-container none-hover">
-                        <span className="profile-links">
+            <div className={'dashboard-sidebar'}>
+                <nav className="dashboard-navigation">
+                    <div>
+                        <div className="dashboard-links-container none-hover">
+                        <span className="dashboard-links">
                             <img src={photoURL} className={'firebase-profile-icon'} alt={displayName}/>
                             <p>{displayName}</p>
                         </span>
-                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="dashboard-links-container">
+                            <Link className="dashboard-links" to="/profile/account">
+                                <FontAwesomeIcon icon={faAddressCard}/>
+                                Account
+                            </Link>
+                        </div>
+                        <div className="dashboard-links-container">
+
+                            <Link className="dashboard-links" to="/profile/bookings">
+                                <FontAwesomeIcon icon={faCalendarAlt}/>
+                                Bookings
+                            </Link>
+                        </div>
+                        <div className="dashboard-links-container">
+                            <Link className="dashboard-links" to="/profile/favourites">
+                                <FontAwesomeIcon icon={faHeart}/>
+                                Favourites
+                            </Link>
+                        </div>
+                        <div className="dashboard-links-container">
+                            <Link className="dashboard-links" to="/profile/inbox">
+                                <FontAwesomeIcon icon={faEnvelope}/>
+                                Inbox
+                            </Link>
+                        </div>
+                        <div className="dashboard-links-container">
+                            <Link className="dashboard-links" to="/profile/payment-methods">
+                                <FontAwesomeIcon icon={faWallet}/>
+                                Payment Methods
+                            </Link>
                         </div>
 
-                        <div>
-                            <div className="profile-links-container">
-                                <Link className="profile-links" to="/profile/account">
-                                    <FontAwesomeIcon icon={faAddressCard}/>
-                                    Account
-                                </Link>
-                            </div>
-                            <div className="profile-links-container">
 
-                                <Link className="profile-links" to="/profile/bookings">
-                                    <FontAwesomeIcon icon={faCalendarAlt}/>
-                                    Bookings
-                                </Link>
-                            </div>
-                            <div className="profile-links-container">
-                                <Link className="profile-links" to="/profile/favourites">
-                                    <FontAwesomeIcon icon={faHeart}/>
-                                    Favourites
-                                </Link>
-                            </div>
-                            <div className="profile-links-container">
-                                <Link className="profile-links" to="/profile/inbox">
-                                    <FontAwesomeIcon icon={faEnvelope}/>
-                                    Inbox
-                                </Link>
-                            </div>
-                            <div className="profile-links-container">
-                                <Link className="profile-links" to="/profile/payment-methods">
-                                    <FontAwesomeIcon icon={faWallet}/>
-                                    Payment Methods
-                                </Link>
-                            </div>
+                    </div>
+                </nav>
 
 
-                        </div>
-                    </nav>
-
-
-                </div>
-            <div className={'profile-content-container'}>
+            </div>
+            <div className={'dashboard-content-container'}>
                 <Outlet/>
 
 

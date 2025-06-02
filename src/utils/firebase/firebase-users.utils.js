@@ -8,8 +8,9 @@ import {
     signOut
 } from 'firebase/auth';
 
-import {getFirestore, doc, getDoc, setDoc, collection, getDocs} from 'firebase/firestore';
+import {doc, getDoc, setDoc, collection, getDocs} from 'firebase/firestore';
 
+// eslint-disable-next-line no-unused-vars
 import {firebaseApp, db} from "./firebase-basics.utils";
 
 
@@ -36,7 +37,7 @@ export const createUserDocument = async (userObject) => {
         const createdAt = new Date()
 
         try {
-            await setDoc(userDocRef, {displayName, email, createdAt})
+            await setDoc(userDocRef, {displayName, email, createdAt, role: 'customer'})
         } catch (error) {
             console.log('error creating user', error.message)
         }
@@ -101,4 +102,15 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) => {
     if (!callback) return;
     return onAuthStateChanged(auth, callback);
+}
+
+export const retrieveUserRole = async (user) => {
+    const userSnapshot =  await getDoc(doc(db, "users", user.uid))
+    if (userSnapshot.exists()) {
+        const userData = userSnapshot.data();
+        return userData.role;
+    } else {
+        console.log('No user data found in Firestore');
+        return null;
+    }
 }

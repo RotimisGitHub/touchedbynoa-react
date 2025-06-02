@@ -8,7 +8,12 @@
 
 .inputDivider {
   display: flex;
+  gap: 10px;
   margin: 15px 0;
 
+}
 
+.input-label {
+  width: 100px;
+  font-weight: bold;
 }
