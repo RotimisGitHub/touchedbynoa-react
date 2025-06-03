@@ -19,7 +19,6 @@
 .env.production.local
 
 #My Files
-src/utils/firebase/firebase-basics.utils.js
 .env
 
 npm-debug.log*
