@@ -10,7 +10,7 @@ const Navigation = () => {
 
     const { currentUser, role } = useSelector((state) => state.user);
 
-    if (!currentUser || role === null) {
+    if (currentUser && role === null) {
         return <h2>Loading user role...</h2>
     }
 
