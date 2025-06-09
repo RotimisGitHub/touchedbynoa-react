@@ -1,4 +1,4 @@
-
+// Made Responsive
 
 .parameter-form {
   display: flex;
@@ -7,7 +7,8 @@
 }
 
 .parameter-span {
-  width: 225px;
+  max-width: 225px;
+  width: 100%;
 }
 
 .parameter-edit-button{
@@ -25,7 +26,8 @@
 }
 
 .profile-account-label {
-  width: 100px;
+  width: 100%;
+  max-width: 100px;
   font-weight: bold;
   align-self: flex-end;
 }
@@ -46,3 +48,26 @@
   height: 96px;
   width: 96px;
 }
+
+.payment-header-icon img,
+.payment-method-icons img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 600px) {
+
+
+  .parameter-span,
+  .profile-account-label {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .payment-header-icon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+

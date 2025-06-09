@@ -13,15 +13,23 @@
 }
 
 .product-image {
-  border-radius: 8px 8px 8px 8px;
+  border-radius: 0.5rem;
   max-width: 100%;
   height: auto;
 }
 
 .products-booking-container {
+  display: flex;
   overflow-y: scroll;
   flex-wrap: wrap;
+
+  .product-information{
+    font-size: clamp(0.75rem, 2vw, 1rem);
+  }
 }
+
+
+
 .product-size-selection {
 
   .custom-radio-divs{
@@ -48,6 +56,9 @@
   width: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  
+}
 
 
 

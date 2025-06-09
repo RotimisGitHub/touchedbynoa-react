@@ -1,5 +1,5 @@
 import './Product.styles.scss'
-import {useParams} from "react-router-dom";
+import {redirect, useNavigate, useParams} from "react-router-dom";
 import ProgressiveButton from "../../General-Components/Buttons/ProgressiveButton.component";
 import {useState} from "react";
 import BookingPage from "../Booking-Confirmation/Booking-Page.components";
@@ -8,17 +8,23 @@ import Modal from "../../General-Components/Modal/Modal.component";
 import {useDispatch, useSelector} from "react-redux";
 import {setHairstyle} from "../../store/calendar/calendar.reducer";
 import {selectHairstyleReducer} from "../../store/hairstyles/hairstyles.selector";
+import {selectUserSlice} from "../../store/user/user.selector";
 
 
 const Product = () => {
 
     const {collection} = useSelector(selectHairstyleReducer)
+    const user = useSelector(selectUserSlice);
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
     const [activeModal, setModalState] = useState(false)
 
 
 
     const {productId} = useParams();
+
+    if (!user) navigate('/auth')
     if (!collection) return <h2>Loading product data...</h2>;
     const allHairstyles = Object.values(collection).flatMap(category => category);
     const product = allHairstyles

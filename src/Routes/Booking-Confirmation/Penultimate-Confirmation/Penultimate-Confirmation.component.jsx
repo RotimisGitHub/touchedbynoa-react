@@ -56,7 +56,6 @@ const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBo
         <div className={'pc-container'}>
             <div className={'pc-header'}>
                 <TimeZone/>
-                <div className={'pc-selected-date'}>
 
                     <div className={'pc-selected-times'}>
                         <span><FontAwesomeIcon icon={faCalendarWeek}/> {date.toLocaleString()}</span>
@@ -64,7 +63,7 @@ const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBo
                         <span><FontAwesomeIcon icon={faStopwatch}/> {hairstyleDuration} Hours</span>
                         <span><FontAwesomeIcon icon={faLocation}/> Location Will Be Emailed When Booking Confirmed</span>
                     </div>
-                </div>
+
             </div>
             <div className={'pc-body'}>
                 <SizeSelection selectedSizes={selectedSizes} handleSelectedSizes={handleSelectedSizes}/>

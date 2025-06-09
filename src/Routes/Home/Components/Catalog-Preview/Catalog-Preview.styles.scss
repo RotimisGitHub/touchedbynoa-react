@@ -1,11 +1,11 @@
 .catalog-preview-container {
   position: relative;
-  padding: 20px;
-
+  padding: 3rem;
 
   .catalog-preview-text {
     display: flex;
     justify-content: center;
+    font-size: clamp(0.675rem, 2vw, 1.25rem);
   }
 
 }

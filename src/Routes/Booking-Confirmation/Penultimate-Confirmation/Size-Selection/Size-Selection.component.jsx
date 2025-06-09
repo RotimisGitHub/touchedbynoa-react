@@ -22,15 +22,19 @@ const SizeSelection = () => {
                     Choose Length of Style
                 </span>
 
-                {
-                    hairstylesSizes.map((size, index) => {
-                        return (
-                            <CustomRadio type={'length'} index={index} value={size}
-                                         selectedRadio={selectedSizes}
-                                         eventHandler={handleSelectedSizes}/>
-                        )
-                    })
-                }
+                <div className={'product-selection-buttons'}>
+                    {
+                        hairstylesSizes.map((size, index) => {
+                            return (
+                                <CustomRadio type={'length'} index={index} value={size}
+                                             selectedRadio={selectedSizes}
+                                             eventHandler={handleSelectedSizes}/>
+                            )
+                        })
+                    }
+                </div>
+
+
             </div>
 
             <div className={'product-size-selection'}>
@@ -39,15 +43,17 @@ const SizeSelection = () => {
                     Choose Thickness of Style
                 </span>
 
-                {
-                    hairstylesSizes.map((size, index) => {
-                        return (
-                            <CustomRadio type={'thickness'} index={index} value={size}
-                                         selectedRadio={selectedSizes}
-                                         eventHandler={handleSelectedSizes}/>
-                        )
-                    })
-                }
+                <div className={'product-selection-buttons'}>
+                    {
+                        hairstylesSizes.map((size, index) => {
+                            return (
+                                <CustomRadio type={'thickness'} index={index} value={size}
+                                             selectedRadio={selectedSizes}
+                                             eventHandler={handleSelectedSizes}/>
+                            )
+                        })
+                    }
+                </div>
             </div>
 
         </div>

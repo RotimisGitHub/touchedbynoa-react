@@ -1,22 +1,19 @@
+// Made Responsive
+
 .catalog-container {
-  padding-top: 120px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100vw;
 
   .products-container {
-    margin-right: 40px;
     display: grid;
-    gap: 20px;
-    width: 75%;
-    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 90%;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
   }
-  .products-filter-container {
-    margin-left: 20px;
-    width: 25%;
-    overflow-y: scroll;
-  }
+
 }
 
 

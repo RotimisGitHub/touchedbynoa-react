@@ -8,9 +8,17 @@
 
   .size_selection-header{
     display: flex;
-    width: 250px;
+    width: clamp(100px, 5vw, 250px);
     font-weight: bold;
+    font-size: clamp(0.5rem, 0.8rem, 1.75rem);
     margin-left: 10px;
     align-items: center;
   }
+}
+
+.product-selection-buttons {
+  display: flex;
+  flex-direction: row;
+  //flex-wrap: wrap;
+  margin: 0 1rem;
 }

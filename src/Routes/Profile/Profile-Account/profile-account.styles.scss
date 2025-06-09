@@ -1,8 +1,10 @@
+// Made Responsive
+
 .profile-account-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 100px;
+  gap: 6rem;
 }
 
 .profile-left-section, .profile-right-section {
@@ -18,4 +20,18 @@
 h3 {
   align-self: flex-start;
 }
+}
+
+@media screen and (max-width: 768px) {
+  .profile-account-container{
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .profile-left-section, .profile-right-section {
+    width: 90%;
+    height: auto;
+    align-items: flex-start;
+  }
 }

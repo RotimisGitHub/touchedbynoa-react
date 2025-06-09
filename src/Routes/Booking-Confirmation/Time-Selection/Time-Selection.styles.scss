@@ -1,3 +1,5 @@
+// Made Responsive
+
 .time-selection-container {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,7 @@
   border: 5px solid #ff006c;
   height: 70vh;
   background-color: white;
+  padding: 1rem;
 }
 .time-selection-header{
   width: 100%;
@@ -20,7 +23,7 @@
 
 .time-selection-button {
   width: 80%;
-  height: 50px;
+  height: clamp(30px, 20%, 50px);
   background-color: white;
   border-radius: 5px;
   border: 1px solid #ff006c;

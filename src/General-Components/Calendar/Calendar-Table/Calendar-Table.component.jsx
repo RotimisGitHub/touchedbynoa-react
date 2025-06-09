@@ -37,6 +37,7 @@ const CalendarTable = () => {
 
 
     return (
+        <div className={'table-responsive'}>
         <table>
             <thead>
             <tr>
@@ -115,6 +116,7 @@ const CalendarTable = () => {
             }
             </tbody>
         </table>
+        </div>
     )
 }
 
