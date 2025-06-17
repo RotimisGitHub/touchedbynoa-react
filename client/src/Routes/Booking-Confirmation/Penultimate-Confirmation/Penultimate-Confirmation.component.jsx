@@ -30,7 +30,7 @@ const PenultimateConfirmation = ({completeBookingData, setActiveModal}) => {
                     console.error("Stripe session URL not found:", session);
                 }
 
-                await fetch('/api/booking-page', {
+                await fetch('https://touchedbynoa-react.onrender.com/api/booking-page', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
