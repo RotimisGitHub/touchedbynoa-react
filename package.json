@@ -39,7 +39,7 @@
   "scripts": {
     "build-server": "babel server --out-dir dist --extensions \".js,.jsx\"",
     "start-server": "node dist/server.js",
-    "server": "node server/index.js",
+    "server": "node server/src/index.js",
     "start-client": "react-scripts start",
     "start": "npm run build-server && concurrently \"npm run start-server\" \"npm run start-client\"",
     "build": "react-scripts build",

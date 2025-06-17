@@ -21,6 +21,8 @@
 #My Files
 .env
 dist/
+server/dist
+server/node_modules
 
 npm-debug.log*
 yarn-debug.log*
