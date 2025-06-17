@@ -1,5 +1,5 @@
 import rootReducer from './root-reducer';
-import logger from "redux-logger/src";
+import logger from "redux-logger";
 import {configureStore} from "@reduxjs/toolkit";
 
 const middleWares = [logger];
