@@ -1,8 +1,13 @@
 import rootReducer from './root-reducer';
-import logger from "redux-logger";
 import {configureStore} from "@reduxjs/toolkit";
+import logger from "redux-logger";
 
-const middleWares = [logger];
+
+const middleWares = [];
+
+if (process.env.REACT_APP_DEV === 'yes') {
+    middleWares.push(logger);
+}
 
 const store = configureStore({
     reducer: rootReducer,
@@ -10,7 +15,6 @@ const store = configureStore({
         serializableCheck: false,
     }).concat(middleWares)
 });
-
 
 
 export default store;
