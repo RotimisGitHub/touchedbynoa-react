@@ -83,4 +83,4 @@ app.post('/api/booking-page', (req, res) => {
     }
 })
 
-app.listen(port, () => console.log('Running on port 3001'));
+app.listen(port, () => console.log(`Running on port ${port}`));
