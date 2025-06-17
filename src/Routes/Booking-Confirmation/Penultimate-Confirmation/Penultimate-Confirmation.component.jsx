@@ -5,51 +5,48 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarWeek, faLocation, faStopwatch, faUserClock} from "@fortawesome/free-solid-svg-icons";
 import SizeSelection from "./Size-Selection/Size-Selection.component";
 import {addToBookingsCollection} from '../../../utils/firebase/firebase-collections.utils'
-import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectCalendarReducer} from "../../../store/calendar/calendar.selector";
-import {CardElement} from "@stripe/react-stripe-js";
+import {selectUserSlice} from "../../../store/user/user.selector";
 
-import { PaymentRequestButtonElement, useStripe } from '@stripe/react-stripe-js';
-import { useEffect, useState } from 'react';
-
-
-
-const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBookingData, setActiveModal}) => {
-    const {date, time, hairstyleDuration, hairstylePrice} = useSelector(selectCalendarReducer)
-    const navigate = useNavigate()
-    const stripe = useStripe();
-    const [paymentRequest, setPaymentRequest] = useState(null);
-
-    useEffect(() => {
-        if (stripe) {
-            console.log('stripe', stripe)
-            const pr = stripe.paymentRequest({
-                country: 'GB',
-                currency: 'gbp',
-                total: {
-                    label: 'Booking Total',
-                    amount: hairstylePrice * 100,
-                },
-                requestPayerName: true,
-                requestPayerEmail: true,
-            });
-
-            // Check if user can actually use Apple Pay / Google Pay
-            pr.canMakePayment().then(result => {
-                if (result) {
-                    setPaymentRequest(pr); // render the button
-                }
-            });
-        }
-    }, [stripe, hairstylePrice]);
+const PenultimateConfirmation = ({completeBookingData, setActiveModal}) => {
+    const {date, time, hairstyleDuration, selectedSizes} = useSelector(selectCalendarReducer)
+    const currentUser = useSelector(selectUserSlice);
 
     const handleCompleteScheduling = async () => {
 
         const completeBooking = await addToBookingsCollection(completeBookingData)
         if (completeBooking) {
             setActiveModal('close')
-            navigate('/profile/bookings')
+
+            try {
+
+                const checkoutResponse = await fetch('/create-checkout-session', {method: 'POST', body: JSON.stringify({email: currentUser.email})})
+
+                const session = await checkoutResponse.json()
+                if (session.url) {
+                    window.location.href = session.url;
+                } else {
+                    console.error("Stripe session URL not found:", session);
+                }
+
+                await fetch('/api/booking-page', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        currentUser: currentUser.email,
+                        name: currentUser.displayName,
+                        ...completeBookingData
+                    }),
+                });
+
+            } catch (error) {
+                console.error("Error during checkout or booking:", error);
+            }
+
+
         }
     }
     return (
@@ -57,27 +54,25 @@ const PenultimateConfirmation = ({selectedSizes, handleSelectedSizes, completeBo
             <div className={'pc-header'}>
                 <TimeZone/>
 
-                    <div className={'pc-selected-times'}>
-                        <span><FontAwesomeIcon icon={faCalendarWeek}/> {date.toLocaleString()}</span>
-                        <span><FontAwesomeIcon icon={faUserClock}/> {time}</span>
-                        <span><FontAwesomeIcon icon={faStopwatch}/> {hairstyleDuration} Hours</span>
-                        <span><FontAwesomeIcon icon={faLocation}/> Location Will Be Emailed When Booking Confirmed</span>
-                    </div>
+                <div className={'pc-selected-times'}>
+                    <span><FontAwesomeIcon icon={faCalendarWeek}/> {date.toLocaleString()}</span>
+                    <span><FontAwesomeIcon icon={faUserClock}/> {time}</span>
+                    <span><FontAwesomeIcon icon={faStopwatch}/> {hairstyleDuration} Hours</span>
+                    <span><FontAwesomeIcon icon={faLocation}/> Location Will Be Emailed When Booking Confirmed</span>
+                </div>
 
             </div>
             <div className={'pc-body'}>
-                <SizeSelection selectedSizes={selectedSizes} handleSelectedSizes={handleSelectedSizes}/>
+                <SizeSelection/>
 
                 <span>
                     By proceeding, you confirm that you have read and agree to
                     TouchByNoa's Terms of Use and Privacy Notice.
                 </span>
 
-                {paymentRequest && (
-                    <PaymentRequestButtonElement options={{ paymentRequest }} />
-                )}
+
                 <ProgressiveButton type={'button'} disabled={!(selectedSizes?.length && selectedSizes?.thickness)}
-                onClickHandler={handleCompleteScheduling}>
+                                   onClickHandler={handleCompleteScheduling}>
                     Schedule Appointment
                 </ProgressiveButton>
 

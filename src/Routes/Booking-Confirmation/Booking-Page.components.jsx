@@ -8,7 +8,7 @@ import {useSelector} from "react-redux";
 const BookingPage = ({handleModal}) => {
 
 
-    const {selectedSizes, hairstyleDuration, hairstyleTitle, hairstyleImage, year, month, pageState, appointmentTime} = useSelector(state => state.calendar)
+    const {selectedSizes, hairstyleDuration, hairstyleTitle, hairstyleImage, newYear, newMonth, pageState, appointmentTime} = useSelector(state => state.calendar)
     const currentUser = useSelector((state) => state.user);
 
 
@@ -24,8 +24,8 @@ const BookingPage = ({handleModal}) => {
         hairstyleTitle: hairstyleTitle,
         hairstyleImage: hairstyleImage,
         duration: hairstyleDuration,
-        year: year,
-        month: month
+        year: newYear,
+        month: newMonth
 
     }
 
