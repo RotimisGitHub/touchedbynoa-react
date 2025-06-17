@@ -6,10 +6,13 @@ import dotenv from 'dotenv';
 import BookingConfirmationEmail from './Emails/BookingConfirmationEmail.component';
 dotenv.config();
 
+
 const stripe = require('stripe')(process.env.REACT_APP_SECRET_KEY)
 const app = express()
 const port = 3001
-const localhost = 'http://localhost:3000'
+
+const development = process.env.REACT_APP_DEV
+const server = development === 'yes' ? 'http://localhost:3000' : 'https://touchedbynoa-react.onrender.com'
 
 app.use(express.json())
 
@@ -38,8 +41,8 @@ app.post('/create-checkout-session', async (req, res) => {
             },
         ],
         mode: 'payment',
-        success_url: `${localhost}/profile`,
-        cancel_url: `${localhost}/cancel`,
+        success_url: `${server}/profile`,
+        cancel_url: `${server}/cancel`,
         metadata: {
             email: req.body.email
         }
