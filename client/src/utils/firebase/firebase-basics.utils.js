@@ -6,8 +6,8 @@ const firebaseConfig = {
     authDomain: "touchedbynoasite-abc5f.firebaseapp.com",
     projectId: "touchedbynoasite-abc5f",
     storageBucket: "touchedbynoasite-abc5f.firebasestorage.app",
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSENGER_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID
+    messagingSenderId: "1012240440739",
+    appId: "1:1012240440739:web:046ffccc6be407ca8f8e16"
 };
 
 // Initialize Firebase
