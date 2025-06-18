@@ -4,7 +4,6 @@ import {useRef, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
 import CustomInput from "../../../Auth/Components/Inputs/Custom-Input.component";
-
 import {editHairstyle} from '../../../../utils/firebase/firebase-admin-analytics.utils'
 
 const ContentEdit = ({chosenHairstyle, handleModalState}) => {
@@ -39,7 +38,7 @@ const ContentEdit = ({chosenHairstyle, handleModalState}) => {
     };
 
     const handleImbbImageUpload = async (file) => {
-        const apiKey = 'a688f31a29c1018e1d643233e60a6cf8';
+        const apiKey = process.env.REACT_APP_IMBB;
 
         const formData = new FormData();
 

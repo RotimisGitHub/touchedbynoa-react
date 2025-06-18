@@ -1,6 +1,4 @@
-import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import Button from "../../../../General-Components/Buttons/CTA-Button.component";
 import './Hero.styles.scss'
 import braids1 from '../../../../assets/home-hero/braids-2.png';
 import braids2 from '../../../../assets/home-hero/braids-4.png';

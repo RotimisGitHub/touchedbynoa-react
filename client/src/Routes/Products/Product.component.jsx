@@ -1,5 +1,5 @@
 import './Product.styles.scss'
-import {redirect, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ProgressiveButton from "../../General-Components/Buttons/ProgressiveButton.component";
 import {useState} from "react";
 import BookingPage from "../Booking-Confirmation/Booking-Page.components";

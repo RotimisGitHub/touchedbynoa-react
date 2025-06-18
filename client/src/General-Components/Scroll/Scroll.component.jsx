@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronRight, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
 import './Scroll.styles.scss'
-import {useState, useRef} from "react";
+import {useRef} from "react";
 
 
 const Scroll = (props) => {

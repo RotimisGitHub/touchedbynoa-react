@@ -1,4 +1,3 @@
-
 import './Home.styles.scss'
 import Hero from './Components/Hero/Hero.component'
 import CatalogPreview from "./Components/Catalog-Preview/Catalog-Preview.component";
