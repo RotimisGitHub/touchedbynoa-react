@@ -26,6 +26,6 @@
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
-    "caniuse-lite": "^1.0.30001723"
+    "caniuse-lite": "^1.0.30001724"
   }
 }
