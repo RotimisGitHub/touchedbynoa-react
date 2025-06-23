@@ -1,9 +1,7 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
 import dotenv from 'dotenv';
-import BookingConfirmationEmail from './Emails/BookingConfirmationEmail.component';
 dotenv.config();
 
 
