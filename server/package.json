@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "build": "echo 'No build needed'"
   },
   "keywords": [],
@@ -17,10 +17,6 @@
     "nodemailer": "^7.0.3",
     "path-to-regexp": "^8.2.0",
     "stripe": "^18.2.1"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.27.2",
-    "browserslist": "^4.21.9",
-    "caniuse-lite": "^1.0.30001510"
   }
+
 }
