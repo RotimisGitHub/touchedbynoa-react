@@ -1,6 +1,5 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
-import React from 'react';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -95,12 +94,11 @@ app.post('/api/booking-page', (req, res) => {
                 </tbody>
             </table>
 
-            ${bookingInformation.hairstyleImage ? (
-                <div>
-                    <img src={bookingInformation.hairstyleImage} alt="Selected hairstyle" />
-                </div>
-            )
-            : ''}
+            ${bookingInformation.hairstyleImage ? `
+              <div>
+                <img src="${bookingInformation.hairstyleImage}" alt="Selected hairstyle" />
+              </div>
+            ` : ''}
 
             <p>
                 The location of your appointment will be sent to this email address closer to the date of your appointment.
