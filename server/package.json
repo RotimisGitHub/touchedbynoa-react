@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel src --out-dir dist --extensions \".js,.jsx\"",
-    "postinstall": "npx update-browserslist-db@latest",
-    "start": "node dist/index.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,15 +15,10 @@
     "express": "^5.1.0",
     "nodemailer": "^7.0.3",
     "path-to-regexp": "^8.2.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "stripe": "^18.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.27.2",
-    "@babel/core": "^7.27.4",
-    "@babel/preset-env": "^7.27.2",
-    "@babel/preset-react": "^7.27.1",
     "browserslist": "^4.21.9",
     "caniuse-lite": "^1.0.30001510"
   }
