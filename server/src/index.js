@@ -95,11 +95,12 @@ app.post('/api/booking-page', (req, res) => {
                 </tbody>
             </table>
 
-            ${bookingInformation.hairstyleImage && (
+            ${bookingInformation.hairstyleImage ? (
                 <div>
                     <img src={bookingInformation.hairstyleImage} alt="Selected hairstyle" />
                 </div>
-            )}
+            )
+            : ''}
 
             <p>
                 The location of your appointment will be sent to this email address closer to the date of your appointment.
