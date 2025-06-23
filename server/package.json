@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir dist --extensions \".js,.jsx\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npx update-browserslist-db@latest",
     "start": "node dist/index.js"
   },
   "keywords": [],
